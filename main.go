@@ -7,6 +7,8 @@ import (
 	"server/app/student"
 	"server/app/teacher"
 	"server/routers"
+	"github.com/jinzhu/gorm"
+	_ "github.com/jinzhu/gorm/dialects/mysql"
 )
 
 func index(r *gin.Engine){
@@ -16,6 +18,17 @@ func index(r *gin.Engine){
 }
 
 func main()  {
+	//初始化数据库链接
+	db, err := gorm.Open("mysql", "root:123456@(127.0.0.1:3306)/gin?charset=utf8mb4&parseTime=True&loc=Local")
+
+	if err!= nil{
+		panic(err)
+	}
+	db.AutoMigrate(&student.Student{},&teacher.Teacher{})
+	db.DB().SetMaxIdleConns(10)
+	db.DB().SetMaxOpenConns(100)
+
+	defer db.Close()
 	// 加载多个APP的路由配置
 	routers.Include(
 		student.Routers,
