@@ -23,8 +23,8 @@ func getStudent(c *gin.Context){
 }
 
 func getStudentList(c *gin.Context){
-	page,_ := strconv.Atoi(c.Query("page"))
-	limit,_ := strconv.Atoi(c.Query("limit"))
+	page,_ := strconv.Atoi(c.DefaultQuery("page","1"))
+	limit,_ := strconv.Atoi(c.DefaultQuery("limit","10"))
 	stuList := GetStuList(page,limit)
 	common.GETHandleResult(stuList,c)
 }

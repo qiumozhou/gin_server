@@ -11,6 +11,7 @@ type Teacher struct {
 	Age   int   `gorm:"type:int;not null"`
 	Gender int   `gorm:"type:int;not null"`
 	Class  string `gorm:"type:varchar(20);not null"`
+	Number int
 	CTM   time.Time  `gorm:"column:ctm;default:CURRENT_TIMESTAMP" json:"ctm"`
 	UTM  time.Time   `gorm:"column:utm;default:CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP" json:"utm"`
 }
