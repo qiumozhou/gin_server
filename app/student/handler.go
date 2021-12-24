@@ -19,7 +19,15 @@ func getStudent(c *gin.Context){
 	id := c.Param("id")
 	i,_ := strconv.Atoi(id)
 	stu := GetStu(i)
-	common.GETHandleResult(stu,c)
+	res := GetCache("student")
+	if res!= ""{
+		common.GETHandleResult(res,c)
+	}else{
+		SetCache(stu)
+	}
+
+
+
 }
 
 func getStudentList(c *gin.Context){

@@ -11,8 +11,8 @@ type Student struct {
 	Age        int `json:"age" gorm:"type:int;not null;"`
 	Gender     int `json:"gender" gorm:"type:int;not null;"`
 	TeacherID      int `json:"teacher_id" gorm:"type:int;not null;"`
-	CreatedAt time.Time `json:ctm`
-	UpdatedAt time.Time `json:utm`
+	CreatedAt time.Time `json:"ctm"`
+	UpdatedAt time.Time `json:"utm"`
 }
 
 
