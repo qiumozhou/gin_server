@@ -8,6 +8,7 @@ func Routers(e *gin.Engine){
 	v1 := e.Group("/api/v1")
 	v1.GET("/student/:id",getStudent)
 	v1.GET("/students",getStudentList)
+	v1.POST("/uploadimg",uploadIMG)
 	//v1.Use(middlewares.Validate())
 	{
 		v1.POST("/student",addStudent)

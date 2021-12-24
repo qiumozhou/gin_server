@@ -3,6 +3,7 @@ package student
 import (
 	"fmt"
 	"github.com/gin-gonic/gin"
+	"net/http"
 	"server/app/common"
 	"strconv"
 )
@@ -51,6 +52,17 @@ func deleteStudent(c *gin.Context){
 	i,_ := strconv.Atoi(id)
 	stu := DeleteStu(i)
 	common.DELETEHandleResult(stu,c)
+}
+
+func uploadIMG(c *gin.Context)  {
+	file,_ := c.FormFile("imgfile")
+	filePath := common.StringSplice("/home/qiumozhou/Desktop/gin_server/media/img/",file.Filename)
+	fmt.Println("接收到文件: ", filePath)
+	c.SaveUploadedFile(file, filePath)
+	c.JSON(http.StatusOK, gin.H{
+		"code":0,
+		"msg":"ok",
+	})
 }
 
 
