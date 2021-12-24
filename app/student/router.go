@@ -2,14 +2,13 @@ package student
 
 import (
 	"github.com/gin-gonic/gin"
-	"server/app/middlewares"
 )
 
 func Routers(e *gin.Engine){
 	v1 := e.Group("/api/v1")
 	v1.GET("/student/:id",getStudent)
 	v1.GET("/students",getStudentList)
-	v1.Use(middlewares.Validate())
+	//v1.Use(middlewares.Validate())
 	{
 		v1.POST("/student",addStudent)
 		v1.PUT("/student",putStudent)

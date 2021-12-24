@@ -11,7 +11,7 @@ import (
 func addStudent(c *gin.Context){
 	var stu Student
 	c.BindJSON(&stu)
-	res := AddStu(stu)
+	res := AddStu(stu,c)
 	common.POSTHandleResult(res,c)
 }
 

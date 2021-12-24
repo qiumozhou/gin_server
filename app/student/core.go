@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"github.com/garyburd/redigo/redis"
 	"server/component/redis"
+
 )
 
 func SetCache(data interface{})string{
