@@ -3,6 +3,7 @@ package mysql
 import (
 	"fmt"
 	"github.com/jinzhu/gorm"
+	"github.com/robfig/config"
 )
 
 func dbConn(User, Password, Host, Db string, Port int) *gorm.DB {
@@ -24,7 +25,12 @@ func dbConn(User, Password, Host, Db string, Port int) *gorm.DB {
 
 func GetDb(dbName string) (conn *gorm.DB) {
 	for {
-		conn = dbConn("root", "123456", "127.0.0.1", dbName, 3306)
+		c,_ := config.ReadDefault("config.ini")
+		MysqlUser,_ := c.String("mysql","User")
+		MysqlPWD,_ := c.String("mysql","Password")
+		MysqlHost,_ := c.String("mysql","Host")
+		MysqlPort,_ := c.Int("mysql","Port")
+		conn = dbConn(MysqlUser, MysqlPWD, MysqlHost, dbName, MysqlPort)
 		if conn != nil {
 			break
 		}
