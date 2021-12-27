@@ -1,6 +1,7 @@
 package student
 
 import (
+	"encoding/json"
 	"fmt"
 	"github.com/gin-gonic/gin"
 	"net/http"
@@ -20,11 +21,14 @@ func getStudent(c *gin.Context){
 	id := c.Param("id")
 	i,_ := strconv.Atoi(id)
 	stu := GetStu(i)
+	var newStudent Student
 	res := GetCache("student")
 	if res!= ""{
-		common.GETHandleResult(res,c)
+		json.Unmarshal([]byte(res),&newStudent)
+		common.GETHandleResult(newStudent,c)
 	}else{
 		SetCache(stu)
+		common.GETHandleResult(stu,c)
 	}
 
 
